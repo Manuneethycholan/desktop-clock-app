@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/desktop-clock-app/static/css/main.3868c518.css",
+    "main.js": "/desktop-clock-app/static/js/main.e4dea94d.js",
+    "index.html": "/desktop-clock-app/index.html",
+    "main.3868c518.css.map": "/desktop-clock-app/static/css/main.3868c518.css.map",
+    "main.e4dea94d.js.map": "/desktop-clock-app/static/js/main.e4dea94d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3868c518.css",
+    "static/js/main.e4dea94d.js"
+  ]
+}

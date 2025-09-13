@@ -1,0 +1,28 @@
+{
+  "timestamp": "2025-09-13T10:48:12.919Z",
+  "buildSize": 72955,
+  "files": {
+    "html": 1,
+    "js": 2,
+    "css": 1,
+    "images": 142,
+    "other": 12
+  },
+  "performance": {
+    "jsSize": 178,
+    "cssSize": 33,
+    "totalAssetSize": 211,
+    "lighthouse": {
+      "performance": 90,
+      "accessibility": 95,
+      "bestPractices": 90,
+      "seo": 85
+    }
+  },
+  "deployment": {
+    "ready": true,
+    "githubPages": true,
+    "serviceWorker": true,
+    "manifest": true
+  }
+}

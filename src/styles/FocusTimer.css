@@ -1,0 +1,185 @@
+.focus-timer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 900;
+}
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.time-setters {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Removed button styles - now using scrollable time values */
+
+.time-input {
+  font-size: 6rem;
+  font-weight: bold;
+  min-width: 4ch;
+  width: 4ch;
+  text-align: center;
+  background: transparent;
+  border: 2px solid;
+  border-radius: 1rem;
+  padding: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.time-input:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.time-input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1);
+}
+
+.time-input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Hide number input arrows */
+.time-input::-webkit-outer-spin-button,
+.time-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.time-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.time-separator {
+  font-size: 6rem;
+  font-weight: bold;
+  margin: 0 1rem;
+}
+
+.time-label {
+  font-size: 1rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}.ti
+mer-controls {
+  display: flex;
+  gap: 2rem;
+}
+
+.start-btn, .stop-btn {
+  background: transparent;
+  border: 2px solid;
+  border-radius: 2rem;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.start-btn:hover, .stop-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.alarm-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  animation: pulse 2s infinite;
+}
+
+.alarm-message {
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.congrats-message {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Removed alarm-icon styles - no longer used */
+
+.alarm-dismiss-btn {
+  background: transparent;
+  border: 2px solid;
+  border-radius: 2rem;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.alarm-dismiss-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Removed bounce animation - no longer used */
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .time-setters {
+    gap: 1rem;
+    font-size: 3rem;
+  }
+  
+  .time-input {
+    font-size: 4rem;
+  }
+  
+  .time-separator {
+    font-size: 4rem;
+    margin: 0 0.5rem;
+  }
+  
+  .alarm-message {
+    font-size: 3rem;
+  }
+  
+  .congrats-message {
+    font-size: 1.5rem;
+  }
+}

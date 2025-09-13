@@ -1,0 +1,63 @@
+/* Settings Button Styles */
+
+.settings-button {
+  position: fixed;
+  top: clamp(1rem, 3vh, 3rem);
+  right: clamp(1rem, 3vw, 3rem);
+  width: clamp(3rem, 6vw, 4rem);
+  height: clamp(3rem, 6vw, 4rem);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.settings-button:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.settings-button:active {
+  transform: scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .settings-button {
+    top: clamp(0.75rem, 2vh, 2rem);
+    right: clamp(0.75rem, 2vw, 2rem);
+    width: clamp(2.5rem, 8vw, 3.5rem);
+    height: clamp(2.5rem, 8vw, 3.5rem);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .settings-button {
+    background: rgba(0, 0, 0, 0.95);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .settings-button {
+    transition: none;
+  }
+  
+  .settings-button:hover {
+    transform: none;
+  }
+}

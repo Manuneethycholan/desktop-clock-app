@@ -1,0 +1,469 @@
+/* Clock Component Styles with Responsive Design */
+
+.clock-container {
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8);
+  user-select: none;
+  pointer-events: none;
+  /* Use CSS Grid for consistent two-line layout */
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: clamp(0.5rem, 1vh, 1rem);
+  justify-items: center;
+  /* Smooth transitions for position and size changes */
+  transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Full-screen centered clock using viewport units */
+.clock-fullscreen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  /* Responsive sizing using viewport units */
+  width: clamp(20rem, 80vw, 60rem);
+  max-width: 90vw;
+  /* Smooth transitions for position changes - less bouncy */
+  transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.clock-fullscreen .clock-time-line {
+  /* Increased responsive font sizing using viewport width and height */
+  font-size: clamp(4rem, 12vw, 16rem);
+  font-weight: 300;
+  /* Use Flexbox for consistent time element alignment */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 4rem);
+  line-height: 1;
+  /* Ensure both sides have same height */
+  min-height: 1em;
+}
+
+.clock-fullscreen .clock-time-left {
+  font-weight: 200;
+  letter-spacing: clamp(0.05em, 0.1vw, 0.15em);
+  /* Consistent sizing for time elements */
+  font-size: 1em;
+}
+
+.clock-fullscreen .clock-time-right {
+  /* Smaller size for AM/PM and seconds - using absolute units to avoid double transition */
+  font-size: clamp(2rem, 6vw, 8rem);
+  font-weight: 400;
+  opacity: 0.9;
+  /* Stack AM/PM and seconds vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 0.9;
+  white-space: pre-line;
+  text-align: center;
+  /* Match height proportionally */
+  height: auto;
+}
+
+.clock-fullscreen .clock-date-line {
+  /* Date text size proportional to time width */
+  font-size: clamp(1.2rem, 3vw, 4rem);
+  font-weight: 300;
+  opacity: 0.8;
+  letter-spacing: clamp(0.03em, 0.05vw, 0.08em);
+  text-align: center;
+  line-height: 1.2;
+  /* Match the width of the time line above more precisely */
+  width: fit-content;
+  max-width: clamp(20rem, 80vw, 60rem);
+  margin: 0 auto;
+}
+
+/* Bottom-left positioned clock with responsive positioning */
+.clock-bottom-left {
+  position: fixed;
+  /* Responsive positioning using viewport units */
+  bottom: clamp(1rem, 3vh, 3rem);
+  left: clamp(1rem, 3vw, 3rem);
+  z-index: 10;
+  /* Tighter width constraint to prevent overflow */
+  width: fit-content;
+  max-width: clamp(12rem, 35vw, 20rem);
+  /* Smooth transitions for position changes - less bouncy */
+  transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  text-align: left;
+  /* Ensure content doesn't overflow */
+  overflow: hidden;
+}
+
+.clock-bottom-left .clock-time-line {
+  /* Increased responsive font sizing for overlay mode */
+  font-size: clamp(1.75rem, 4vw, 4rem);
+  font-weight: 300;
+  /* Use Flexbox for consistent alignment */
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 1.5rem);
+  line-height: 1;
+  /* Ensure both sides have same height */
+  min-height: 1em;
+}
+
+.clock-bottom-left .clock-time-left {
+  font-weight: 200;
+  letter-spacing: clamp(0.03em, 0.05vw, 0.08em);
+  /* Consistent sizing for time elements */
+  font-size: 1em;
+}
+
+.clock-bottom-left .clock-time-right {
+  /* Smaller size for AM/PM and seconds - using absolute units to avoid double transition */
+  font-size: clamp(0.8rem, 2.2vw, 2.6rem);
+  font-weight: 400;
+  opacity: 0.9;
+  /* Stack AM/PM and seconds vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 0.9;
+  white-space: pre-line;
+  text-align: center;
+  /* Match height proportionally */
+  height: auto;
+}
+
+.clock-bottom-left .clock-date-line {
+  /* Increased date text to better match time width (about 80% of time width) */
+  font-size: clamp(0.8rem, 2vw, 1.4rem);
+  font-weight: 300;
+  opacity: 0.8;
+  letter-spacing: clamp(0.02em, 0.03vw, 0.05em);
+  line-height: 1.2;
+  /* Match closer to time line width */
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Ensure it doesn't exceed the time line width */
+  box-sizing: border-box;
+}
+
+/* Responsive breakpoints for optimal clock display */
+
+/* Large desktop screens (1920px+) - Enhanced readability */
+@media (min-width: 120em) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(10rem, 14vw, 20rem);
+    gap: clamp(3rem, 4vw, 6rem);
+  }
+  
+  .clock-fullscreen .clock-date-line {
+    font-size: clamp(2.5rem, 5vw, 6rem);
+  }
+  
+  .clock-bottom-left .clock-time-line {
+    font-size: clamp(2.5rem, 4.5vw, 5rem);
+  }
+  
+  .clock-bottom-left .clock-date-line {
+    font-size: clamp(0.9rem, 2.2vw, 1.8rem);
+  }
+}
+
+/* Desktop screens (1200px - 1919px) - Standard sizing */
+@media (min-width: 75em) and (max-width: 119.9375em) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(8rem, 12vw, 16rem);
+    gap: clamp(2rem, 3.5vw, 5rem);
+  }
+  
+  .clock-fullscreen .clock-date-line {
+    font-size: clamp(2rem, 4vw, 5rem);
+  }
+  
+  .clock-bottom-left {
+    bottom: clamp(2rem, 3vh, 4rem);
+    left: clamp(2rem, 3vw, 4rem);
+  }
+  
+  .clock-bottom-left .clock-date-line {
+    font-size: clamp(0.7rem, 1.8vw, 1.3rem);
+  }
+}
+
+/* Tablet landscape (768px - 1199px) - Optimized for touch */
+@media (min-width: 48em) and (max-width: 74.9375em) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(4rem, 8vw, 8rem);
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+  
+  .clock-fullscreen .clock-date-line {
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  }
+  
+  .clock-bottom-left {
+    bottom: clamp(1.5rem, 2.5vh, 2.5rem);
+    left: clamp(1.5rem, 2.5vw, 2.5rem);
+    max-width: clamp(18rem, 45vw, 28rem);
+  }
+  
+  .clock-bottom-left .clock-time-line {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  }
+}
+
+/* Tablet portrait (481px - 767px) - Vertical optimization */
+@media (min-width: 30.0625em) and (max-width: 47.9375em) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(3rem, 7vw, 6rem);
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+  
+  .clock-fullscreen .clock-date-line {
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
+  }
+  
+  .clock-bottom-left {
+    bottom: clamp(1rem, 2vh, 2rem);
+    left: clamp(1rem, 2vw, 2rem);
+    max-width: clamp(15rem, 50vw, 22rem);
+  }
+}
+
+/* Mobile landscape (426px - 480px) - Compact horizontal layout */
+@media (min-width: 26.625em) and (max-width: 30em) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+  
+  .clock-fullscreen .clock-time-right {
+    font-size: clamp(0.6em, 0.7em, 0.8em);
+    line-height: 1.0;
+  }
+  
+  .clock-bottom-left .clock-time-line {
+    font-size: clamp(1rem, 2.8vw, 1.8rem);
+    gap: clamp(0.5rem, 1.2vw, 1rem);
+  }
+}
+
+/* Mobile portrait (320px - 425px) - Vertical stack for very small screens */
+@media (max-width: 26.5625em) {
+  .clock-fullscreen .clock-time-line {
+    /* Stack vertically on very small screens */
+    flex-direction: column;
+    gap: clamp(0.25rem, 1vh, 0.75rem);
+    align-items: center;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+  
+  .clock-fullscreen .clock-time-right {
+    font-size: clamp(0.7em, 0.8em, 0.9em);
+    /* Maintain visual hierarchy even when stacked */
+    opacity: 0.85;
+    line-height: 1.0;
+  }
+  
+  .clock-fullscreen .clock-date-line {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    margin-top: clamp(0.5rem, 1vh, 1rem);
+  }
+  
+  .clock-bottom-left {
+    bottom: clamp(0.75rem, 1.5vh, 1.5rem);
+    left: clamp(0.75rem, 1.5vw, 1.5rem);
+    max-width: clamp(12rem, 60vw, 18rem);
+  }
+  
+  .clock-bottom-left .clock-time-line {
+    font-size: clamp(0.9rem, 4vw, 1.5rem);
+    gap: clamp(0.25rem, 1vw, 0.75rem);
+  }
+  
+  .clock-bottom-left .clock-date-line {
+    font-size: clamp(0.7rem, 3vw, 1rem);
+  }
+}
+
+/* Ultra-wide screens (aspect ratio > 21:9) - Horizontal optimization */
+@media (min-aspect-ratio: 21/9) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(6rem, 8vw, 14rem);
+    gap: clamp(4rem, 5vw, 8rem);
+  }
+  
+  .clock-bottom-left {
+    /* Position more centrally on ultra-wide screens */
+    bottom: clamp(2rem, 4vh, 4rem);
+    left: clamp(3rem, 5vw, 6rem);
+  }
+}
+
+/* Very tall screens (aspect ratio < 4:3) - Vertical optimization */
+@media (max-aspect-ratio: 4/3) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(3rem, 6vh, 8rem);
+    gap: clamp(1rem, 2vh, 3rem);
+  }
+  
+  .clock-fullscreen .clock-date-line {
+    font-size: clamp(1rem, 2vh, 2.5rem);
+    margin-top: clamp(0.5rem, 1vh, 1.5rem);
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 30em) {
+  .clock-fullscreen .clock-time-line {
+    font-size: clamp(2rem, 8vh, 5rem);
+    gap: clamp(1rem, 3vh, 2rem);
+  }
+  
+  .clock-fullscreen .clock-date-line {
+    font-size: clamp(0.8rem, 2vh, 1.5rem);
+  }
+  
+  .clock-bottom-left .clock-time-line {
+    font-size: clamp(1rem, 4vh, 2rem);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .clock-container {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+  }
+}
+
+/* Smooth transitions and animations for clock elements */
+.clock-container {
+  /* Smooth transitions for position and size changes - less bouncy */
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+              font-size 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+              top 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+              left 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+              bottom 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.clock-time-line,
+.clock-date-line {
+  /* Smooth transitions for text changes and responsive sizing */
+  transition: font-size 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+              gap 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+              opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+              width 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.clock-time-left,
+.clock-time-right,
+.clock-date {
+  /* Smooth transitions for individual text elements - synchronized timing */
+  transition: font-size 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0s,
+              letter-spacing 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0s,
+              opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0s,
+              transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0s,
+              height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0s,
+              line-height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0s;
+}
+
+/* Animation for time updates */
+@keyframes timeUpdate {
+  0% { opacity: 1; }
+  50% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+.clock-time-left {
+  animation: timeUpdate 1s ease-in-out;
+}
+
+/* Smooth entrance animation - no position change */
+@keyframes clockFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.clock-container {
+  animation: clockFadeIn 0.5s ease-out;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .clock-container,
+  .clock-time-line,
+  .clock-date-line,
+  .clock-time-left,
+  .clock-time-right,
+  .clock-date {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .clock-container {
+    color: #000000;
+    text-shadow: none;
+  }
+}/*
+ Error handling styles */
+.clock-error {
+  position: relative;
+}
+
+.clock-error .clock-time-left,
+.clock-error .clock-time-right,
+.clock-error .clock-date {
+  color: #ff6b6b;
+  animation: errorPulse 2s ease-in-out infinite;
+}
+
+.clock-error-indicator {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  font-size: 1rem;
+  z-index: 11;
+  animation: errorBlink 1.5s ease-in-out infinite;
+  cursor: help;
+}
+
+@keyframes errorPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes errorBlink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+
+/* Reduce motion for error animations */
+@media (prefers-reduced-motion: reduce) {
+  .clock-error .clock-time-left,
+  .clock-error .clock-time-right,
+  .clock-error .clock-date,
+  .clock-error-indicator {
+    animation: none;
+  }
+  
+  .clock-error .clock-time-left,
+  .clock-error .clock-time-right,
+  .clock-error .clock-date {
+    opacity: 0.8;
+  }
+}

@@ -1,0 +1,442 @@
+/* Wallpaper Component Styles with Responsive CSS Scaling */
+
+.wallpaper-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+  background-color: #000000;
+  /* Ensure full screen coverage */
+  display: block;
+}
+
+.wallpaper-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000000;
+  transform-origin: center center;
+  /* Remove transform transition to not interfere with animation */
+  transition: opacity 0.8s ease-in-out,
+              filter 0.3s ease-in-out;
+  /* Performance optimizations */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Zoom animation keyframes - 10s zoom in, 10s zoom out */
+@keyframes wallpaperZoom {
+  0% {
+    transform: scale(1.0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}
+
+
+
+/* Apply zoom animation to ALL wallpaper images */
+.wallpaper-image {
+  animation: wallpaperZoom 20s ease-in-out infinite !important;
+  transform-origin: center center !important;
+}
+
+/* All wallpapers use the same zoom animation */
+
+/* Loading state */
+.wallpaper-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+}
+
+.wallpaper-loading-text {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 300;
+  opacity: 0.7;
+  text-align: center;
+}
+
+/* Error state */
+.wallpaper-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+}
+
+.wallpaper-error-text {
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+/* Empty state (no wallpapers selected) */
+.wallpaper-empty {
+  background-color: #000000;
+}
+
+/* Smooth transitions between wallpapers */
+.wallpaper-image {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+/* Animation for wallpaper changes */
+@keyframes wallpaperFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.wallpaper-image.wallpaper-entering {
+  animation: wallpaperFadeIn 0.8s ease-in-out;
+}
+
+/* Responsive breakpoints for wallpaper scaling optimization */
+
+/* Large desktop screens (1920px+) - Enhanced scaling range */
+@media (min-width: 120em) {
+  @keyframes wallpaperZoomEnlargedDesktop {
+    0% {
+      transform: scale(1.3);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1.3);
+    }
+  }
+  
+  .wallpaper-size-normal .wallpaper-image {
+    animation: wallpaperZoom 20s ease-in-out infinite !important;
+  }
+  
+  .wallpaper-size-enlarged .wallpaper-image {
+    animation: wallpaperZoomEnlargedDesktop 20s ease-in-out infinite !important;
+  }
+}
+
+/* Desktop screens (1200px - 1919px) - Standard scaling */
+@media (min-width: 75em) and (max-width: 119.9375em) {
+  @keyframes wallpaperZoomEnlargedStandard {
+    0% {
+      transform: scale(1.3);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1.3);
+    }
+  }
+  
+  .wallpaper-size-normal .wallpaper-image {
+    animation: wallpaperZoom 20s ease-in-out infinite !important;
+  }
+  
+  .wallpaper-size-enlarged .wallpaper-image {
+    animation: wallpaperZoomEnlargedStandard 20s ease-in-out infinite !important;
+  }
+}
+
+/* Tablet landscape (768px - 1199px) - Moderate scaling adjustments */
+@media (min-width: 48em) and (max-width: 74.9375em) {
+  @keyframes wallpaperZoomTablet {
+    0% {
+      transform: scale(1.0);
+    }
+    50% {
+      transform: scale(1.08);
+    }
+    100% {
+      transform: scale(1.0);
+    }
+  }
+  
+  @keyframes wallpaperZoomEnlargedTablet {
+    0% {
+      transform: scale(1.2);
+    }
+    50% {
+      transform: scale(1.28);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+  
+  .wallpaper-size-normal .wallpaper-image {
+    animation: wallpaperZoomTablet 20s ease-in-out infinite !important;
+  }
+  
+  .wallpaper-size-enlarged .wallpaper-image {
+    animation: wallpaperZoomEnlargedTablet 20s ease-in-out infinite !important;
+  }
+  
+  .wallpaper-loading-text,
+  .wallpaper-error-text {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    padding: clamp(0.5rem, 2vw, 1rem);
+  }
+}
+
+/* Tablet portrait (481px - 767px) - Conservative scaling */
+@media (min-width: 30.0625em) and (max-width: 47.9375em) {
+  .wallpaper-size-normal .wallpaper-image {
+    transform: scale(1.0);
+  }
+  
+  .wallpaper-size-enlarged .wallpaper-image {
+    transform: scale(clamp(1.15, 1.2, 1.25));
+  }
+  
+  .wallpaper-loading-text,
+  .wallpaper-error-text {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    padding: clamp(0.75rem, 2.5vw, 1.25rem);
+  }
+}
+
+/* Mobile landscape (426px - 480px) - Minimal scaling differences */
+@media (min-width: 26.625em) and (max-width: 30em) {
+  .wallpaper-size-enlarged .wallpaper-image {
+    transform: scale(clamp(1.1, 1.15, 1.2));
+  }
+  
+  .wallpaper-loading-text,
+  .wallpaper-error-text {
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    padding: clamp(0.5rem, 3vw, 1rem);
+  }
+}
+
+/* Mobile portrait (320px - 425px) - Subtle scaling for small screens */
+@media (max-width: 26.5625em) {
+  .wallpaper-size-normal .wallpaper-image {
+    transform: scale(1.0);
+  }
+  
+  .wallpaper-size-enlarged .wallpaper-image {
+    transform: scale(clamp(1.05, 1.1, 1.15));
+  }
+  
+  .wallpaper-loading-text,
+  .wallpaper-error-text {
+    font-size: clamp(0.75rem, 4vw, 0.9rem);
+    padding: clamp(0.5rem, 4vw, 1rem);
+    line-height: 1.4;
+  }
+}
+
+/* Ultra-wide screens (aspect ratio > 21:9) - Enhanced horizontal scaling */
+@media (min-aspect-ratio: 21/9) {
+  .wallpaper-size-enlarged .wallpaper-image {
+    transform: scale(clamp(1.4, 1.5, 1.6));
+  }
+}
+
+/* Very tall screens (aspect ratio < 4:3) - Vertical scaling optimization */
+@media (max-aspect-ratio: 4/3) {
+  .wallpaper-size-enlarged .wallpaper-image {
+    transform: translate(-50%, -50%) scale(clamp(1.2, 1.3, 1.35));
+  }
+}
+
+/* Landscape orientation with limited height */
+@media (orientation: landscape) and (max-height: 30em) {
+  .wallpaper-size-enlarged .wallpaper-image {
+    transform: translate(-50%, -50%) scale(clamp(1.1, 1.15, 1.2));
+  }
+  
+  .wallpaper-loading-text,
+  .wallpaper-error-text {
+    font-size: clamp(0.8rem, 3vh, 1rem);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .wallpaper-loading-text {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Reduced motion support - only disable for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper-image {
+    transition: none;
+    animation: none !important;
+  }
+  
+  .wallpaper-image.wallpaper-entering {
+    animation: none;
+  }
+  
+  .wallpaper-size-normal .wallpaper-image {
+    animation: none !important;
+    transform: scale(1.0) !important;
+  }
+  
+  .wallpaper-size-enlarged .wallpaper-image {
+    animation: none !important;
+    transform: scale(1.2) !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .wallpaper-container {
+    display: none;
+  }
+}
+
+/* Performance optimizations */
+.wallpaper-image {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Ensure wallpaper stays behind other content */
+.wallpaper-container {
+  pointer-events: none;
+  user-select: none;
+}/* Enh
+anced error handling styles */
+.wallpaper-error {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.wallpaper-error-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #ff6b6b;
+}
+
+.wallpaper-error-text h3 {
+  color: #ff6b6b;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.wallpaper-error-text p {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.wallpaper-error-text small {
+  color: #cccccc;
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+/* Empty state styles */
+.wallpaper-empty-overlay {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem 2rem;
+  border-radius: 4px;
+}
+
+.wallpaper-empty-text {
+  color: #cccccc;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Image fallback handling */
+.wallpaper-image-fallback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform-origin: center center;
+  z-index: -1;
+  background-color: #1a1a1a;
+}
+
+/* Loading state enhancements */
+.wallpaper-loading {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+}
+
+.wallpaper-loading-text {
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Responsive error handling */
+@media (max-width: 768px) {
+  .wallpaper-error-overlay {
+    padding: 1.5rem;
+    max-width: 90vw;
+  }
+  
+  .wallpaper-error-text h3 {
+    font-size: 1.25rem;
+  }
+  
+  .wallpaper-error-text p {
+    font-size: 0.9rem;
+  }
+  
+  .wallpaper-empty-overlay {
+    bottom: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .wallpaper-empty-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Reduced motion for error states */
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper-loading-text {
+    animation: none;
+  }
+}
