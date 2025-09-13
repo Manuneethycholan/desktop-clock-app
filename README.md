@@ -256,10 +256,6 @@ After building, check:
 4. Push to branch: `git push origin feature-name`
 5. Submit a pull request
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## 🎉 Enjoy Your Desktop Clock!
 
 Once deployed, you can:
